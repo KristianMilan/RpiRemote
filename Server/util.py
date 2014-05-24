@@ -1,5 +1,7 @@
 #IMPORTS
 import socket
+from os import listdir,getcwd,chdir
+from pickle import dumps,loads
 #IMPORTS
 
 class RpiListener:
@@ -21,3 +23,18 @@ class RpiListener:
 
   def unbind(self):
     self.sock.close()
+
+class DirectoryHandler:
+  def __init__(self,path):
+    if path!=getcwd():
+      chdir(path)
+  def dirName(self):
+    return getcwd()
+  def changeDir(self,name)
+    try:
+      chdir(name)
+    except:
+    print "Directory "+name+" not found"
+  def getFiles(self)
+    files = listdir(getcwd())
+    return dumps(files)

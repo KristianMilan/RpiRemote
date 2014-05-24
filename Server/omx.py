@@ -14,11 +14,11 @@ class OmxHandler:
     call("omxplayer -o hdmi " + path + " " + self.fifoPath +" &", shell=True)
 
   def parseCmd(self,cmd):
-    if cmd=="p":
+    if cmd=="op":
       print "Command: play"
       self.__play()
       return True
-    elif cmd=="q":
+    elif cmd=="oq":
       print "Command: quit"
       self.__quit()
       return False
