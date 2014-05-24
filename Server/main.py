@@ -1,24 +1,17 @@
 ###IMPORTS
 from util import RpiListener
-from omx import CmdParser
+from omx import OmxHandler
 ###IMPORTS
 
 listener = RpiListener()
-cp = CmdParser()
+cp = OmxHandler()
 cp.createFifo()
 listener.bind()
 print "Established listener. Waiting for incoming commands."
 
-we = True
-while we:
+continueParsing = True
+while continueParsing:
   cmd = listener.listenForCmd()
-  if cmd:
-    print "Received command: " + cmd
-    if cmd == "p":
-      # cp.play()
-      pass
-    if cmd == "q":
-      we = False
-
+  continueParsing = cp.parseCmd(cmd)
 listener.unbind()
 cp.removeFifo()
