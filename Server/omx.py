@@ -27,6 +27,6 @@ class OmxHandler:
       return True
 
   def __play(self):
-    call("echo -n p > " + self.fifoPath, shell=True)
+    call("echo -n p > " + self.fifoPath + "&", shell=True)
   def __quit(self):
-    call("echo -n q > " + self.fifoPath, shell=True)
+    call("echo -n q > " + self.fifoPath + "&", shell=True)

@@ -10,10 +10,14 @@ cp.createFifo()
 dir = DirectoryHandler("/home/pi") 
 listener.bind()
 print "Established listener. Waiting for incoming commands."
+listener.startListening()
 
 continueParsing = True
 while continueParsing:
+  print "Listening..."
   cmd = listener.listenForCmd()
   continueParsing = cp.parseCmd(cmd)
+print "Stopping listening"
+listener.stopListening()
 listener.unbind()
 cp.removeFifo()

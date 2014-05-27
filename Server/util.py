@@ -5,7 +5,7 @@ from pickle import dumps,loads
 #IMPORTS
 
 class RpiListener:
-  PORT = 5003 #Port to listen to
+  PORT = 4002 #Port to listen to
   def __init__(self):
     self.sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM) 
 
@@ -13,12 +13,17 @@ class RpiListener:
     self.sock.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1) # Enables rebinding of socket
     self.sock.bind(('',self.PORT))
     self.sock.listen(5)
+  
+  def startListening(self):
+    self.client,self.addr = self.sock.accept() 
+    print 'Incomming connection from ', self.addr
+
+  def stopListening(self):
+    self.client.close()
 
   def listenForCmd(self):
-    client,addr = self.sock.accept() 
-    print 'Incomming connection from ', addr
-    cmd = client.recv(128)
-    client.close()
+    cmd = self.client.recv(128)
+    print "Recived "+cmd
     return cmd
 
   def unbind(self):
@@ -34,7 +39,7 @@ class DirectoryHandler:
     try:
       chdir(name)
     except:
-    print "Directory "+name+" not found"
+      print "Directory "+name+" not found"
   def getFiles(self):
     files = listdir(getcwd())
     return dumps(files)
