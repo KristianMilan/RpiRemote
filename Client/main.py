@@ -19,6 +19,7 @@ class Remote(FloatLayout):
         self.conf = Config("config")
         self.conf.parseConfig()
         self.conn = RpiConnect(self.conf.ip,self.conf.port)
+        self.conn.connect()
 
     def playButton(self):
         self.status_line.text = "Play clicked"
@@ -27,6 +28,7 @@ class Remote(FloatLayout):
     def quitButton(self):
         self.status_line.text = "Quit clicked"
         self.conn.send("oq")
+        self.conn.disconnect()
         exit()
 
 class RemoteApp(App):

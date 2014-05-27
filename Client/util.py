@@ -43,11 +43,12 @@ class RpiConnect(object):
     self.sock = socket(AF_INET, SOCK_STREAM)
 
   def connect(self):
-    self.sock.connect((self.IP,self.PORT))
+    self.sock.connect((self.ip,self.port))
 
   def disconnect(self):
     self.sock.close()
   
   def send(self,msg):
-    self.sock.send(msg)
+    if self.sock.send(msg):
+      print msg+" sent"
 
