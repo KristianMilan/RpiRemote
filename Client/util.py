@@ -44,9 +44,11 @@ class RpiConnect(object):
 
   def connect(self):
     self.sock.connect((self.ip,self.port))
+    print "Connected"
 
   def disconnect(self):
     self.sock.close()
+    print "Disconnected"
   
   def send(self,msg):
     if self.sock.send(msg):
