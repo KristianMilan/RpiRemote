@@ -8,6 +8,7 @@ class Config(object):
     self.parser = ConfigParser()
     if self.parser.read(path):
       self.parsed = True
+      print "Config file loaded"
     else:
       self.parsed = False
       print "Could not read config file"
