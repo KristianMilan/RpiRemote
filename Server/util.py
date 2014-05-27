@@ -30,11 +30,11 @@ class DirectoryHandler:
       chdir(path)
   def dirName(self):
     return getcwd()
-  def changeDir(self,name)
+  def changeDir(self,name):
     try:
       chdir(name)
     except:
     print "Directory "+name+" not found"
-  def getFiles(self)
+  def getFiles(self):
     files = listdir(getcwd())
     return dumps(files)

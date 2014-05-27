@@ -5,7 +5,7 @@ import sys
 
 class OmxHandler:
   def __init__(self):
-    self.fifoPath = "/home/pi/scripts/tv/omfifo"
+    self.fifoPath = "/home/pi/omfifo"
   def createFifo(self):
     call("mkfifo " + self.fifoPath, shell=True)
   def removeFifo(self):
