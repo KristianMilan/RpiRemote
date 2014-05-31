@@ -1,5 +1,8 @@
 #IMPORTS#
-from subprocess import call
+from subprocess import call 
+import os,sys
+sys.path.append(os.path.abspath('../Common'))
+from movies import Movie, MovieDict
 import sys
 #IMPORTS#
 class CommandHandler:
@@ -36,4 +39,7 @@ class OmxHandler:
 
   def quit(self):
     call("echo -n q > " + self.fifoPath + "&", shell=True)
-    call("rm " + self.fifoPath, shell=True)  
+    call("rm " + self.fifoPath, shell=True) 
+
+class DbHandler:
+  pass
