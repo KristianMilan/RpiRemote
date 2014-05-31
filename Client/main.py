@@ -24,10 +24,12 @@ class Remote(FloatLayout):
     def playButton(self):
         self.status_line.text = "Play clicked"
         self.conn.send("op")
+        self.status_line.text = self.conn.recv()
 
     def quitButton(self):
         self.status_line.text = "Quit clicked"
         self.conn.send("oq")
+        self.status_line.text = self.conn.recv()
         self.conn.disconnect()
         exit()
 

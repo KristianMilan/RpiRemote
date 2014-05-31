@@ -53,4 +53,10 @@ class RpiConnect(object):
   def send(self,msg):
     if self.sock.send(msg):
       print msg+" sent"
+  
+  def recv(self):
+    print "Waiting for answer from Rpi"
+    answer = self.sock.recv(128)
+    print "Answer from Rpi: "+answer
+    return answer
 

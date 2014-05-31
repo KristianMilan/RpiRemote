@@ -1,23 +1,22 @@
 ###IMPORTS
 from util import RpiListener
-from util import DirectoryHandler
-from omx import OmxHandler
+from handlers import CommandHandler
 ###IMPORTS
 
 listener = RpiListener()
-cp = OmxHandler()
-cp.createFifo()
-dir = DirectoryHandler("/home/pi") 
+cp = CommandHandler()
+
 listener.bind()
 print "Established listener. Waiting for incoming commands."
-listener.startListening()
 
-continueParsing = True
-while continueParsing:
+listener.startListening()
+while True:
   print "Listening..."
   cmd = listener.listenForCmd()
-  continueParsing = cp.parseCmd(cmd)
+  answer = cp.parseCmd(cmd)
+  running = listener.answer(answer)
+  if answer == "SHUTDOWN":
+    break
 print "Stopping listening"
 listener.stopListening()
 listener.unbind()
-cp.removeFifo()
